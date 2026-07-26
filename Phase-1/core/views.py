@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
+from .decorators import admin_required
 
 @csrf_exempt
 # Create your views here.
@@ -51,5 +52,14 @@ def login(request):
     if not check_password(password, member.password_hash):
         return HttpResponse("Invalid email or password!")
 
+    request.session["member_id"] = member.member_id
 
     return HttpResponse("Login Successful!")
+
+@admin_required
+def admin_dashboard(request):
+    return HttpResponse("Welcome Admin!")
+
+@admin_required
+def manage_roster(request):
+    return HttpResponse("Roster management allowed!")
