@@ -3,7 +3,7 @@ import json
 from .models import Member
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -31,7 +31,25 @@ def register(request):
         membership_type=membership_type
     )
 
-    return HttpResponse("Registration Succesful!")
+    return HttpResponse("Registration Successful!")
 
+@csrf_exempt
 def login(request):
-    return HttpResponse("Login Endpoint")
+    data = json.loads(request.body)
+
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        return HttpResponse("Missing required fields!")
+
+    member = Member.objects.filter(email=email).first()
+
+    if not member:
+        return HttpResponse("Invalid email or password!")
+
+    if not check_password(password, member.password_hash):
+        return HttpResponse("Invalid email or password!")
+
+
+    return HttpResponse("Login Successful!")
