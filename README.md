@@ -7,7 +7,7 @@ A full-stack Sports Club Management System built using Django and MySQL.
 ## Development Progress
 
 - [x] Phase 1 – Project setup, Django configuration, MySQL integration, and database initialization
-- [ ] Phase 2 – Database models and relationships
+- [x] Phase 2 – Database models and relationships
 - [ ] Phase 3 – CRUD functionality
 - [ ] Phase 4 – Authentication and authorization
 - [ ] Phase 5 – Final integration and testing
