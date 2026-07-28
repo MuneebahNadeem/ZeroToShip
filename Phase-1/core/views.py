@@ -1,6 +1,6 @@
 import json
 
-from .models import Member, SportsClub
+from .models import Member, SportsClub, Roster
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
@@ -79,3 +79,36 @@ def club_listings(request):
 
     return JsonResponse(club_list, safe=False)
 
+@csrf_exempt
+def enroll_member(request):
+    data = json.loads(request.body)
+
+    member_id = data.get("member_id")
+    club_id = data.get("club_id")
+
+    if not member_id or not club_id:
+        return JsonResponse({"message": "Missing required fields!"})
+
+    member = Member.objects.filter(member_id=member_id).first()
+
+    if not member:
+        return JsonResponse({"message" : "Member not found!"})
+
+    club = SportsClub.objects.filter(club_id=club_id).first()
+
+    if not club:
+        return JsonResponse({"message" : "Club not found!"})
+    
+    if Roster.objects.filter(member=member, club=club).exists():
+        return JsonResponse({"message" : "Member is already enrolled in this club!"})
+
+    current_enrollments = Roster.objects.filter(club=club).count()
+
+    if current_enrollments >= club.max_capacity_students:
+        return JsonResponse({"message" : "Club is already full!"})
+
+    return JsonResponse({
+        "message" : "Enrollment can proceed."
+    })
+
+    
