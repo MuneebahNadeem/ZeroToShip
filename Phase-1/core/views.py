@@ -1,8 +1,8 @@
 import json
 
-from .models import Member
+from .models import Member, SportsClub
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 from .decorators import admin_required
@@ -63,3 +63,19 @@ def admin_dashboard(request):
 @admin_required
 def manage_roster(request):
     return HttpResponse("Roster management allowed!")
+
+def club_listings(request):
+    clubs = SportsClub.objects.all()
+    club_list = []
+
+    for club in clubs:
+        club_list.append(
+            {"club_id" : club.club_id,
+             "club_name" : club.club_name,
+             "coach_name" : club.coach_name,
+             "max_capacity_students" : club.max_capacity_students,
+            }
+        )
+
+    return JsonResponse(club_list, safe=False)
+

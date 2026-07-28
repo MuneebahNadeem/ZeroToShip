@@ -25,5 +25,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('admin-dashboard/', views.admin_dashboard, name='admin-dashboard'),
     path('manage-roster/', views.manage_roster, name='manage-roster'),
+    path('api/club/listings/', views.club_listings, name='club-listings'),
 ]
 

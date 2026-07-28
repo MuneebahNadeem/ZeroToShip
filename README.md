@@ -15,7 +15,7 @@ A full-stack Sports Club Management System built using Django and MySQL.
 ## Project Structure
 
 ```
-ZeroToShip/
+ZeroToShip/°°
 │
 ├── Phase-1/     # Django & Database Setup
 ├── Phase-2/     # Database Models & Relationships
