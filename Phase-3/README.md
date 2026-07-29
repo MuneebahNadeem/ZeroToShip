@@ -23,13 +23,15 @@ Implement the core business logic for the Sports Club Management System by build
 - Verified sports club existence before enrollment
 - Prevented duplicate member enrollments
 - Implemented club capacity validation
-- Tested enrollment validation pipeline using Postman
+- Created roster records after successful enrollment validation
+- Successfully enrolled members through the enrollment endpoint
+- Linked members and sports clubs through roster entries
+- Tested enrollment validation and enrollment workflow using Postman
 - Verified successful and failed enrollment validation scenarios
+- Verified roster record creation in the MySQL database
 
 ### In Progress
 
-- Completing member enrollment workflow
-- Creating roster records after successful validation
 - Club leave endpoint (`DELETE /api/clubs/leave`)
 - Transactional enrollment handling
 
@@ -47,7 +49,7 @@ Convert Records to JSON
 Return Club Listings
 ```
 
-## Enrollment Validation Workflow
+## Enrollment Workflow
 
 ```
 Client Request
@@ -64,7 +66,9 @@ Check Duplicate Enrollment
       ↓
 Check Club Capacity
       ↓
-Enrollment Can Proceed
+Create Roster Record
+      ↓
+Return Success Response
 ```
 
 ## Implemented Endpoints
@@ -74,7 +78,7 @@ Enrollment Can Proceed
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/clubs/listings/` | GET | Retrieve all available sports clubs |
-| `/api/clubs/enroll/` | POST | Validate member enrollment requests before creating roster entries |
+| `/api/clubs/enroll/` | POST | Enroll a member into a sports club after successful validation |
 
 ## Business Logic Implementations
 
@@ -85,6 +89,8 @@ Enrollment Can Proceed
 - Verified member and club existence
 - Prevented duplicate enrollments
 - Enforced club capacity constraints before enrollment
+- Created roster records after successful validation
+- Linked members and sports clubs through roster entries
 
 ## Manual Testing
 
@@ -97,7 +103,7 @@ Current business logic features were tested using Postman.
 - Confirmed JSON response structure
 - Confirmed database records match API output
 
-### Enrollment Validation Testing
+### Enrollment Testing
 
 - Verified successful enrollment validation
 - Verified missing required fields handling
@@ -105,3 +111,5 @@ Current business logic features were tested using Postman.
 - Verified invalid club rejection
 - Verified duplicate enrollment prevention
 - Verified club capacity validation
+- Verified successful roster record creation
+- Confirmed enrollment records were stored correctly in the MySQL database

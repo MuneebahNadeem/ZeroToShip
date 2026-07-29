@@ -41,7 +41,7 @@ class Roster(models.Model):
         on_delete = models.CASCADE,
     )
 
-    join_date = models.DateField()
+    join_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.member.name} - {self.club.club_name}"

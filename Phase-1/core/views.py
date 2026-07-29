@@ -107,8 +107,16 @@ def enroll_member(request):
     if current_enrollments >= club.max_capacity_students:
         return JsonResponse({"message" : "Club is already full!"})
 
+    Roster.objects.create(
+        member=member,
+        club=club
+    )
+
     return JsonResponse({
-        "message" : "Enrollment can proceed."
+        "message" : "Enrollment Successful!",
+        "member_id" : member.member_id,
+        "club_id" : club.club_id,
+        "roster_id" : roster.roster_id
     })
 
     
