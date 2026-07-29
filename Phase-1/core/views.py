@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 from .decorators import admin_required
+from django.db import transaction
 
 @csrf_exempt
 # Create your views here.
@@ -98,18 +99,20 @@ def enroll_member(request):
     if not club:
         return JsonResponse({"message" : "Club not found!"})
     
-    if Roster.objects.filter(member=member, club=club).exists():
-        return JsonResponse({"message" : "Member is already enrolled in this club!"})
+    with transaction.atomic():
 
-    current_enrollments = Roster.objects.filter(club=club).count()
+        if Roster.objects.filter(member=member, club=club).exists():
+            return JsonResponse({"message" : "Member is already enrolled in this club!"})
 
-    if current_enrollments >= club.max_capacity_students:
-        return JsonResponse({"message" : "Club is already full!"})
+        current_enrollments = Roster.objects.filter(club=club).count()
 
-    roster = Roster.objects.create(
-        member=member,
-        club=club
-    )
+        if current_enrollments >= club.max_capacity_students:
+            return JsonResponse({"message" : "Club is already full!"})
+
+        roster = Roster.objects.create(
+            member=member,
+            club=club
+        )
 
     return JsonResponse({
         "message" : "Enrollment Successful!",

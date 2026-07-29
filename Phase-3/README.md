@@ -25,10 +25,7 @@ Implement the core business logic for the Sports Club Management System by build
 - Removed roster records after successful leave requests
 - Tested leave workflow using Postman
 - Verified roster record creation and deletion in the MySQL database
-
-### In Progress
-
-- Transactional enrollment handling
+- Wrapped enrollment operations inside Django transaction blocks using `transaction.atomic()`
 
 ## Club Listings Workflow
 
@@ -109,6 +106,7 @@ Return Success Response
 - Linked members and sports clubs through roster entries
 - Validated leave requests before roster deletion
 - Removed roster records through Django ORM after successful validation
+- Protected enrollment operations using database transactions
 
 ## Manual Testing
 
