@@ -10,29 +10,24 @@ Implement the core business logic for the Sports Club Management System by build
 
 - Created club listings endpoint (`GET /api/clubs/listings`)
 - Connected club listings endpoint through project URL configuration
-- Retrieved all sports clubs from the MySQL database
-- Queried database records using Django ORM (`SportsClub.objects.all()`)
-- Converted database objects into structured JSON responses
-- Returned club information using Django's `JsonResponse`
+- Retrieved sports club records using Django ORM
+- Returned structured JSON responses for club listings
 - Tested club listings endpoint using Postman
-- Verified successful retrieval of all club records
 - Created member enrollment endpoint (`POST /api/clubs/enroll`)
-- Parsed enrollment request data from JSON
-- Validated required enrollment fields
-- Verified member existence before enrollment
-- Verified sports club existence before enrollment
-- Prevented duplicate member enrollments
+- Validated enrollment request data
+- Verified member and club existence
+- Prevented duplicate enrollments
 - Implemented club capacity validation
-- Created roster records after successful enrollment validation
-- Successfully enrolled members through the enrollment endpoint
-- Linked members and sports clubs through roster entries
-- Tested enrollment validation and enrollment workflow using Postman
-- Verified successful and failed enrollment validation scenarios
-- Verified roster record creation in the MySQL database
+- Created roster records after successful enrollment
+- Tested enrollment workflow using Postman
+- Created club leave endpoint (`DELETE /api/clubs/leave`)
+- Validated leave requests before member removal
+- Removed roster records after successful leave requests
+- Tested leave workflow using Postman
+- Verified roster record creation and deletion in the MySQL database
 
 ### In Progress
 
-- Club leave endpoint (`DELETE /api/clubs/leave`)
 - Transactional enrollment handling
 
 ## Club Listings Workflow
@@ -71,6 +66,26 @@ Create Roster Record
 Return Success Response
 ```
 
+## Leave Club Workflow
+
+```
+Client Request
+      ↓
+Receive JSON Data
+      ↓
+Validate Required Fields
+      ↓
+Verify Member Exists
+      ↓
+Verify Club Exists
+      ↓
+Verify Enrollment Exists
+      ↓
+Delete Roster Record
+      ↓
+Return Success Response
+```
+
 ## Implemented Endpoints
 
 ### Club Operations
@@ -79,6 +94,7 @@ Return Success Response
 |----------|--------|-------------|
 | `/api/clubs/listings/` | GET | Retrieve all available sports clubs |
 | `/api/clubs/enroll/` | POST | Enroll a member into a sports club after successful validation |
+| `/api/clubs/leave/` | DELETE | Remove a member from a sports club |
 
 ## Business Logic Implementations
 
@@ -91,6 +107,8 @@ Return Success Response
 - Enforced club capacity constraints before enrollment
 - Created roster records after successful validation
 - Linked members and sports clubs through roster entries
+- Validated leave requests before roster deletion
+- Removed roster records through Django ORM after successful validation
 
 ## Manual Testing
 
@@ -105,7 +123,7 @@ Current business logic features were tested using Postman.
 
 ### Enrollment Testing
 
-- Verified successful enrollment validation
+- Verified successful enrollment
 - Verified missing required fields handling
 - Verified invalid member rejection
 - Verified invalid club rejection
@@ -113,3 +131,13 @@ Current business logic features were tested using Postman.
 - Verified club capacity validation
 - Verified successful roster record creation
 - Confirmed enrollment records were stored correctly in the MySQL database
+
+### Leave Club Testing
+
+- Verified successful member removal from sports clubs
+- Verified missing required fields handling
+- Verified invalid member rejection
+- Verified invalid club rejection
+- Verified rejection when member is not enrolled
+- Confirmed roster records are removed from the MySQL database
+- Verified repeated leave requests are handled correctly

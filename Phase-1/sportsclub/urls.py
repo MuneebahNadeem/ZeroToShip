@@ -27,5 +27,6 @@ urlpatterns = [
     path('manage-roster/', views.manage_roster, name='manage-roster'),
     path('api/club/listings/', views.club_listings, name='club-listings'),
     path('api/club/enroll/', views.enroll_member, name='enroll-member'),
+    path('api/club/leave/', views.leave_club, name='leave-club'),
 ]
 
