@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Member Portal</title>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!--Header-->
+    <header>
+        <h1>Sports Club Management System</h1>
+        <p>Welcome, Student!</p>
+    </header>
+    
+    <!--Main Content-->
+    <main>
+        <!--Sports Club Section-->
+        <section id="sports-clubs">
+            <h2>Sports Clubs</h2>
+            <div id="club-container">
+                <!--Javascript will create club cards here-->
+            </div>
+        </section>
+
+        <!--Practice Schedule Section-->
+        <section id="practice-schedule">
+            <h2>Practice Schedule</h2>
+            <div id="schedule-container">
+                <!--Javascript will create schedule cards here-->
+            </div>
+        </section>
+
+        <!--Registration Form Section-->
+        <section id="registration-form">
+            <h2>Club Registration Form</h2>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name">
+
+                <label for="email">Email</label>
+                <input type="email" id="email">
+
+                <label for="club">Select Club</label>
+                <select id="club">
+                    <option>Select a Club</option>
+                </select>
+
+                <button type="submit">Register</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!--Footer-->
+    <footer>
+        <p>&copy; 2026 Sports Club Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="../static/js/student.js"></script>
+
+</body>
+
+</html>
