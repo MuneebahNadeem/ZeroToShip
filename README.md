@@ -1,32 +1,46 @@
 # ZeroToShip
 
-A full-stack Sports Club Management System built using Django and MySQL.
+A full-stack Sports Club Management System built using Django, MySQL, HTML, CSS, and JavaScript.
 
 ---
 
 ## Development Progress
 
 - [x] Phase 1 – Project setup, Django configuration, MySQL integration, and database initialization
-- [x] Phase 2 – Database models and relationships
-- [ ] Phase 3 – CRUD functionality
-- [ ] Phase 4 – Authentication and authorization
-- [ ] Phase 5 – Final integration and testing
+- [x] Phase 2 – Database models, relationships, and schema implementation
+- [x] Phase 3 – Business logic, club operations, and enrollment management
+- [x] Phase 4 – Static user interface, dashboard layouts, and mock data rendering
+- [ ] Phase 5 – Final integration, backend connectivity, and system testing
+
+---
 
 ## Project Structure
 
-```
-ZeroToShip/°°
+```text
+ZeroToShip/
 │
-├── Phase-1/     # Django & Database Setup
+├── Phase-1/     # Project Setup & Database Configuration
 ├── Phase-2/     # Database Models & Relationships
-├── Phase-3/     # CRUD Operations
-├── Phase-4/     # Authentication & Authorization
-├── Phase-5/     # Final Integration & Testing
+├── Phase-3/     # Business Logic & Club Operations
+├── Phase-4/     # Static User Interface & Dashboard Design
+├── Phase-5/     # Final Integration & System Testing
 └── README.md
+```
+
+---
 
 ## Tech Stack
 
+### Backend
 - Python
 - Django
 - MySQL
-- Git & GitHub
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+
+### Version Control
+- Git
+- GitHub
