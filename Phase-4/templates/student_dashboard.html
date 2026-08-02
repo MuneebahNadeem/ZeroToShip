@@ -10,17 +10,20 @@
 </head>
 
 <body>
+
     <!--Header-->
     <header>
         <h1>Sports Club Management System</h1>
         <p>Welcome, Student!</p>
     </header>
-    
+
     <!--Main Content-->
     <main>
+
         <!--Sports Club Section-->
         <section id="sports-clubs">
             <h2>Sports Clubs</h2>
+
             <div id="club-container">
                 <!--Javascript will create club cards here-->
             </div>
@@ -29,6 +32,7 @@
         <!--Practice Schedule Section-->
         <section id="practice-schedule">
             <h2>Practice Schedule</h2>
+
             <div id="schedule-container">
                 <!--Javascript will create schedule cards here-->
             </div>
@@ -37,6 +41,7 @@
         <!--Registration Form Section-->
         <section id="registration-form">
             <h2>Club Registration Form</h2>
+
             <form>
                 <label for="name">Name</label>
                 <input type="text" id="name">
@@ -45,8 +50,8 @@
                 <input type="email" id="email">
 
                 <label for="club">Select Club</label>
-                <select id="club">
-                    <option>Select a Club</option>
+                <select id="club" required>
+                    <option value="" selected disabled hidden>Select a Club</option>
                 </select>
 
                 <button type="submit">Register</button>
