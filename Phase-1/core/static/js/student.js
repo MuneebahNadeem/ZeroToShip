@@ -1,30 +1,42 @@
 fetch("/api/club/listings/")
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(clubs){
+.then(function(response){
+    return response.json();
+})
+.then(function(clubs){
 
-        const clubContainer = document.getElementById("club-container");
+    const clubContainer = document.getElementById("club-container");
+    const clubSelect = document.getElementById("club");
 
-        clubs.forEach(function(club){
+    clubs.forEach(function(club){
 
-            const card = document.createElement("div");
-            card.classList.add("club-card");
+        // Create club card
+        const card = document.createElement("div");
+        card.classList.add("club-card");
 
-            card.innerHTML = `
-                <h3>${club.club_name}</h3>
-                <p><strong>Coach:</strong> ${club.coach_name}</p>
-                <p><strong>Capacity:</strong> ${club.max_capacity_students}</p>
-            `;
+        card.innerHTML = `
+            <h3>${club.club_name}</h3>
+            <p><strong>Coach:</strong> ${club.coach_name}</p>
+            <p><strong>Capacity:</strong> ${club.max_capacity_students}</p>
+        `;
 
-            clubContainer.appendChild(card);
+        clubContainer.appendChild(card);
 
-        });
 
-    })
-    .catch(function(error){
-        console.error("Error loading clubs:", error);
+        // Add club to registration dropdown
+        const option = document.createElement("option");
+
+        option.value = club.id;
+        option.textContent = club.club_name;
+
+        clubSelect.appendChild(option);
+
     });
+
+})
+.catch(function(error){
+    console.error("Error loading clubs:", error);
+});
+
 
 const schedules = [
     {
@@ -65,6 +77,7 @@ schedules.forEach(function(schedule){
     scheduleContainer.appendChild(scheduleCard);
 
 });
+
 
 const form = document.querySelector("form");
 
