@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 from .decorators import admin_required
 from django.db import transaction
+from django.shortcuts import render
 
 @csrf_exempt
 # Create your views here.
@@ -154,4 +155,6 @@ def leave_club(request):
         "club_id" : club.club_id
     })
 
-    
+@csrf_exempt
+def student_dashboard(request):
+    return render(request, "student_dashboard.html")
