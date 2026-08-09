@@ -7,9 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
 
 ```
+<title>Student Dashboard</title>
+
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 ```
 
@@ -41,18 +42,17 @@
         <h2>Club Registration Form</h2>
 
         <form>
-            <label for="name">Name</label>
-            <input type="text" id="name">
-
-            <label for="email">Email</label>
-            <input type="email" id="email">
 
             <label for="club">Select Club</label>
+
             <select id="club" required>
-                <option value="" selected disabled hidden>Select a Club</option>
+                <option value="" selected disabled hidden>
+                    Select a Club
+                </option>
             </select>
 
             <button type="submit">Register</button>
+
         </form>
     </section>
 

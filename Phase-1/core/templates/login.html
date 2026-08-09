@@ -1,37 +1,60 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
 
-    <h1>Login</h1>
+    <div class="auth-container">
 
-    <form id="login-form">
+        <div class="auth-card">
 
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Login to the Sports Club Management System</p>
+            </div>
 
-        <br><br>
+            <form id="login-form">
 
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
 
-        <br><br>
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
 
-        <button type="submit">Login</button>
+                <button type="submit">Login</button>
 
-    </form>
+            </form>
 
-    <p id="message"></p>
+            <p id="message"></p>
 
-    <p>
-        Don't have an account?
-        <a href="/register-page/">Register</a>
-    </p>
+            <p class="auth-link">
+                Don't have an account?
+                <a href="/register-page/">Register</a>
+            </p>
+
+        </div>
+
+    </div>
 
     <script>
         const form = document.getElementById("login-form");
@@ -55,20 +78,34 @@
                 })
             })
             .then(function(response) {
-                return response.text();
+
+                if (!response.ok) {
+                    throw new Error("Login request failed.");
+                }
+
+                return response.json();
+
             })
             .then(function(data) {
 
-                message.textContent = data;
+                message.textContent = data.message;
 
-                if (data === "Login Successful!") {
-                    window.location.href = "/student-dashboard/";
+                if (data.message === "Login Successful!") {
+
+                    if (data.membership_type === "Admin") {
+                        window.location.href = "/admin-dashboard/";
+                    } else {
+                        window.location.href = "/student-dashboard/";
+                    }
+
                 }
 
             })
             .catch(function(error) {
+
                 console.error("Login error:", error);
                 message.textContent = "Something went wrong.";
+
             });
 
         });

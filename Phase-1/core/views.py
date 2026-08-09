@@ -63,7 +63,10 @@ def login(request):
 
     request.session["member_id"] = member.member_id
 
-    return HttpResponse("Login Successful!")
+    return JsonResponse({
+    "message": "Login Successful!",
+    "membership_type": member.membership_type
+})
 
 @admin_required
 def admin_dashboard(request):

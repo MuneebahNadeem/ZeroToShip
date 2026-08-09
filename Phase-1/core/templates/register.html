@@ -1,51 +1,75 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+
+    <title>Create Account</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
 
-    <h1>Create Account</h1>
+    <div class="auth-container">
 
-    <form id="register-form">
+        <div class="auth-card">
 
-        <label for="name">Name</label>
-        <input type="text" id="name" required>
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <p>Join the Sports Club Management System</p>
+            </div>
 
-        <br><br>
+            <form id="register-form">
 
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
 
-        <br><br>
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
 
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                >
 
-        <br><br>
+                <label for="membership_type">Membership Type</label>
+                <select id="membership_type" required>
+                    <option value="" selected disabled>Select membership type</option>
+                    <option value="Student">Student</option>
+                    <option value="Admin">Admin</option>
+                </select>
 
-        <label for="membership_type">Membership Type</label>
-        <select id="membership_type" required>
-            <option value="" selected disabled>Select membership type</option>
-            <option value="Student">Student</option>
-            <option value="Admin">Admin</option>
-        </select>
+                <button type="submit">Create Account</button>
 
-        <br><br>
+            </form>
 
-        <button type="submit">Register</button>
+            <p id="message"></p>
 
-    </form>
+            <p class="auth-link">
+                Already have an account?
+                <a href="/login-page/">Login</a>
+            </p>
 
-    <p id="message"></p>
+        </div>
 
-    <p>
-        Already have an account?
-        <a href="/login-page/">Login</a>
-    </p>
+    </div>
 
     <script>
         const form = document.getElementById("register-form");
@@ -94,3 +118,4 @@
 
 </body>
 </html>
+

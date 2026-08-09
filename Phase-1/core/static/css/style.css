@@ -1,71 +1,76 @@
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f9;
     color: #333;
 }
 
-header{
+/* =========================
+   Dashboard Layout
+   ========================= */
+
+header {
     background-color: #1f4e79;
     color: white;
     text-align: center;
     padding: 25px;
 }
 
-header h1{
+header h1 {
     margin-bottom: 10px;
 }
 
-main{
+main {
     width: 90%;
     margin: 30px auto;
 }
 
-section{
+section {
     background-color: white;
     margin-bottom: 25px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-section h2{
+section h2 {
     margin-bottom: 20px;
     color: #1f4e79;
 }
 
-footer{
+footer {
     text-align: center;
     padding: 20px;
     background-color: #1f4e79;
     color: white;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
 }
 
-label{
+label {
     margin-top: 15px;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
 input,
-select{
+select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-button{
+button {
     margin-top: 20px;
     padding: 12px;
     border: none;
@@ -75,106 +80,308 @@ button{
     cursor: pointer;
 }
 
-button:hover{
+button:hover {
     background-color: #163a5c;
 }
 
-#club-container{
+/* =========================
+   Student Club Cards
+   ========================= */
+
+#club-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
-.club-card{
+.club-card {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
     background-color: #f9f9f9;
 }
 
-.club-card h3{
+.club-card h3 {
     color: #1f4e79;
     margin-bottom: 10px;
 }
 
-.club-card p{
+.club-card p {
     margin-bottom: 8px;
 }
 
-#schedule-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+/* =========================
+   Admin Roster
+   ========================= */
 
-.schedule-card{
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-}
-
-.schedule-card h3{
-    color: #1f4e79;
-    margin-bottom: 10px;
-}
-
-.schedule-card p{
-    margin-bottom: 8px;
-}
-
-select{
-    color: #666;
-}
-
-option[value=""]{
-    color: #b0b0b0;
-}
-
-#request-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.request-card{
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-}
-
-.request-card h3{
-    color: #1f4e79;
-    margin-bottom: 10px;
-}
-
-.request-card p{
-    margin-bottom: 8px;
-}
-
-#roster-table{
+#roster-table {
     width: 100%;
     border-collapse: collapse;
 }
 
 #roster-table th,
-#roster-table td{
+#roster-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
 
-#roster-table th{
+#roster-table th {
     background-color: #1f4e79;
     color: white;
 }
 
-#roster-table tr:nth-child(even){
+#roster-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-#user-management button{
+#user-management button {
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+
+/* =================================================
+   Authentication Pages
+   ================================================= */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef4f9 0%,
+            #f4f6f9 50%,
+            #e5eef6 100%
+        );
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+
+    padding: 42px;
+
+    background-color: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(31, 78, 121, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================
+   Authentication Header
+   ========================= */
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-header h1 {
+    color: #1f4e79;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.auth-header p {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   Authentication Form
+   ========================= */
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-card label {
+    margin-top: 17px;
+    margin-bottom: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.auth-card input,
+.auth-card select {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d4d9df;
+    border-radius: 7px;
+
+    background-color: #fafbfc;
+
+    color: #333;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* =========================
+   Faded Input Placeholders
+   ========================= */
+
+.auth-card input::placeholder {
+    color: #b8bec5;
+    opacity: 1;
+}
+
+
+/* =========================
+   Membership Dropdown
+   ========================= */
+
+.auth-card select {
+    color: #333;
+    cursor: pointer;
+}
+
+.auth-card select:invalid {
+    color: #b8bec5;
+}
+
+.auth-card select option {
+    color: #333;
+}
+
+.auth-card select option[value=""] {
+    color: #b8bec5;
+}
+
+
+/* =========================
+   Input Focus
+   ========================= */
+
+.auth-card input:focus,
+.auth-card select:focus {
+    outline: none;
+
+    border-color: #1f4e79;
+
+    background-color: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(31, 78, 121, 0.10);
+}
+
+
+/* =========================
+   Authentication Button
+   ========================= */
+
+.auth-card button {
+    width: 100%;
+    height: 46px;
+
+    margin-top: 27px;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: #1f4e79;
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease,
+        box-shadow 0.2s ease;
+}
+
+.auth-card button:hover {
+    background-color: #163a5c;
+
+    box-shadow:
+        0 4px 10px rgba(31, 78, 121, 0.2);
+}
+
+.auth-card button:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================
+   Authentication Message
+   ========================= */
+
+#message {
+    text-align: center;
+
+    margin-top: 16px;
+
+    color: #1f4e79;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   Login / Register Link
+   ========================= */
+
+.auth-link {
+    text-align: center;
+
+    margin-top: 27px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: #1f4e79;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   Mobile Authentication
+   ========================= */
+
+@media (max-width: 500px) {
+
+    .auth-card {
+        padding: 30px 24px;
+    }
+
+    .auth-header h1 {
+        font-size: 26px;
+    }
+
 }

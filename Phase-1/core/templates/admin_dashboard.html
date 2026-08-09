@@ -1,60 +1,70 @@
+{% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrative Workspace</title>
 
-    <link rel="stylesheet" href="../static/css/style.css">
+```
+<title>Administrative Workspace</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+```
+
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Sports Club Management System</h1>
-        <p>Welcome, Administrator!</p>
-    </header>
+```
+<!-- Header -->
+<header>
+    <h1>Sports Club Management System</h1>
+    <p>Welcome, Administrator!</p>
+</header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Club Rosters -->
-        <section id="club-rosters">
-            <h2>Active Club Members</h2>
+<!-- Main Content -->
+<main>
 
-            <table id="roster-table">
-                <thead>
-                    <tr>
-                        <th>Member</th>
-                        <th>Club</th>
-                        <th>Membership Type</th>
-                    </tr>
-                </thead>
+    <!-- Club Rosters -->
+    <section id="club-rosters">
+        <h2>Active Club Members</h2>
 
-                <tbody>
-                    <!-- JavaScript will create roster rows here -->
-                </tbody>
-            </table>
-        </section>
+        <table id="roster-table">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Club</th>
+                    <th>Membership Type</th>
+                </tr>
+            </thead>
 
-        <!-- User Management -->
-        <section id="user-management">
-            <h2>User Management</h2>
+            <tbody>
+                <!-- JavaScript will create roster rows here -->
+            </tbody>
+        </table>
+    </section>
 
-            <button>Add Member</button>
-            <button>Edit Member</button>
-            <button>Remove Member</button>
-        </section>
+    <!-- User Management -->
+    <section id="user-management">
+        <h2>User Management</h2>
 
-    </main>
+        <button>Add Member</button>
+        <button>Edit Member</button>
+        <button>Remove Member</button>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Sports Club Management System. All rights reserved.</p>
-    </footer>
+</main>
 
-    <script src="../static/js/admin.js"></script>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Sports Club Management System. All rights reserved.</p>
+</footer>
+
+<script src="{% static 'js/admin.js' %}"></script>
+```
 
 </body>
 
