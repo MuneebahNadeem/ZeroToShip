@@ -29,5 +29,7 @@ urlpatterns = [
     path('api/club/enroll/', views.enroll_member, name='enroll-member'),
     path('api/club/leave/', views.leave_club, name='leave-club'),
     path('student-dashboard/', views.student_dashboard, name='student-dashboard'),
+    path('register-page/', views.register_page, name='register-page'),
+    path('login-page/', views.login_page, name='login-page'),
 ]
 

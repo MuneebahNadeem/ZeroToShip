@@ -1,87 +1,98 @@
+let clubs = [];
+
 fetch("/api/club/listings/")
-.then(function(response){
-    return response.json();
-})
-.then(function(clubs){
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error("Failed to load clubs.");
+        }
 
-    const clubContainer = document.getElementById("club-container");
-    const clubSelect = document.getElementById("club");
+        return response.json();
+    })
+    .then(function(data) {
 
-    clubs.forEach(function(club){
+        clubs = data;
 
-        // Create club card
-        const card = document.createElement("div");
-        card.classList.add("club-card");
+        const clubContainer = document.getElementById("club-container");
+        const clubSelect = document.getElementById("club");
 
-        card.innerHTML = `
-            <h3>${club.club_name}</h3>
-            <p><strong>Coach:</strong> ${club.coach_name}</p>
-            <p><strong>Capacity:</strong> ${club.max_capacity_students}</p>
-        `;
+        clubs.forEach(function(club) {
 
-        clubContainer.appendChild(card);
+            // Create club card
+            const card = document.createElement("div");
+            card.classList.add("club-card");
+
+            card.innerHTML = `
+                <h3>${club.club_name}</h3>
+                <p><strong>Coach:</strong> ${club.coach_name}</p>
+                <p><strong>Capacity:</strong> ${club.max_capacity_students}</p>
+            `;
+
+            clubContainer.appendChild(card);
 
 
-        // Add club to registration dropdown
-        const option = document.createElement("option");
+            // Add club to registration dropdown
+            const option = document.createElement("option");
 
-        option.value = club.id;
-        option.textContent = club.club_name;
+            option.value = club.club_id;
+            option.textContent = club.club_name;
 
-        clubSelect.appendChild(option);
+            clubSelect.appendChild(option);
+
+        });
+
+    })
+    .catch(function(error) {
+        console.error("Error loading clubs:", error);
+    });
+
+
+// Registration form
+const form = document.querySelector("#registration-form form");
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const selectedClubId = document.getElementById("club").value;
+
+    console.log("Selected club value:", selectedClubId);
+    console.log("All clubs:", clubs);
+
+    if (!selectedClubId) {
+        alert("Please select a club.");
+        return;
+    }
+
+    fetch("/api/club/enroll/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            club_id: selectedClubId
+        })
+    })
+    .then(function(response) {
+
+        if (!response.ok) {
+            throw new Error("Enrollment request failed.");
+        }
+
+        return response.json();
+    })
+    .then(function(data) {
+
+        console.log("Enrollment response:", data);
+
+        alert(data.message);
+
+    })
+    .catch(function(error) {
+
+        console.error("Enrollment error:", error);
+
+        alert("Something went wrong while enrolling.");
 
     });
 
-})
-.catch(function(error){
-    console.error("Error loading clubs:", error);
-});
-
-
-const schedules = [
-    {
-        club: "Badminton",
-        day: "Tuesday",
-        time: "6:00 PM"
-    },
-    {
-        club: "Basketball",
-        day: "Wednesday",
-        time: "4:00 PM"
-    },
-    {
-        club: "Volleyball",
-        day: "Thursday",
-        time: "6:00 PM"
-    },
-    {
-        club: "Cricket",
-        day: "Friday",
-        time: "3:00 PM"
-    }
-];
-
-const scheduleContainer = document.getElementById("schedule-container");
-
-schedules.forEach(function(schedule){
-
-    const scheduleCard = document.createElement("div");
-    scheduleCard.classList.add("schedule-card");
-
-    scheduleCard.innerHTML = `
-        <h3>${schedule.club}</h3>
-        <p><strong>Day:</strong> ${schedule.day}</p>
-        <p><strong>Time:</strong> ${schedule.time}</p>
-    `;
-
-    scheduleContainer.appendChild(scheduleCard);
-
-});
-
-
-const form = document.querySelector("form");
-
-form.addEventListener("submit", function(event){
-    event.preventDefault();
-    alert("Registration Submitted Successfully!");
 });

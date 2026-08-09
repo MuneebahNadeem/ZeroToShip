@@ -9,6 +9,14 @@ from django.db import transaction
 from django.shortcuts import render
 
 @csrf_exempt
+def register_page(request):
+    return render(request, "register.html")
+
+@csrf_exempt
+def login_page(request):
+    return render(request, "login.html")
+
+@csrf_exempt
 # Create your views here.
 def register(request):
     data = json.loads(request.body)
@@ -84,31 +92,39 @@ def club_listings(request):
 def enroll_member(request):
     data = json.loads(request.body)
 
-    member_id = data.get("member_id")
     club_id = data.get("club_id")
 
-    if not member_id or not club_id:
+    if not club_id:
         return JsonResponse({"message": "Missing required fields!"})
+
+    member_id = request.session.get("member_id")
+
+    if not member_id:
+        return JsonResponse({"message": "User is not logged in!"})
 
     member = Member.objects.filter(member_id=member_id).first()
 
     if not member:
-        return JsonResponse({"message" : "Member not found!"})
+        return JsonResponse({"message": "Member not found!"})
 
     club = SportsClub.objects.filter(club_id=club_id).first()
 
     if not club:
-        return JsonResponse({"message" : "Club not found!"})
-    
+        return JsonResponse({"message": "Club not found!"})
+
     with transaction.atomic():
 
         if Roster.objects.filter(member=member, club=club).exists():
-            return JsonResponse({"message" : "Member is already enrolled in this club!"})
+            return JsonResponse({
+                "message": "Member is already enrolled in this club!"
+            })
 
         current_enrollments = Roster.objects.filter(club=club).count()
 
         if current_enrollments >= club.max_capacity_students:
-            return JsonResponse({"message" : "Club is already full!"})
+            return JsonResponse({
+                "message": "Club is already full!"
+            })
 
         roster = Roster.objects.create(
             member=member,
@@ -116,10 +132,10 @@ def enroll_member(request):
         )
 
     return JsonResponse({
-        "message" : "Enrollment Successful!",
-        "member_id" : member.member_id,
-        "club_id" : club.club_id,
-        "roster_id" : roster.roster_id
+        "message": "Enrollment Successful!",
+        "member_id": member.member_id,
+        "club_id": club.club_id,
+        "roster_id": roster.roster_id
     })
 
 @csrf_exempt
