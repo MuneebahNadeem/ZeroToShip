@@ -17,32 +17,10 @@ const membershipRequests = [
     }
 ];
 
-const roster = [
-    {
-        member: "Abdul Hadi",
-        club: "Badminton",
-        membership: "Student"
-    },
-    {
-        member: "Fatima Noor",
-        club: "Volleyball",
-        membership: "Student"
-    },
-    {
-        member: "Bilal Ahmed",
-        club: "Cricket",
-        membership: "Student"
-    },
-    {
-        member: "Shaheer Khan",
-        club: "Basketball",
-        membership: "Student"
-    }
-];
 
 const requestContainer = document.getElementById("request-container");
 
-membershipRequests.forEach(function(request){
+membershipRequests.forEach(function(request) {
 
     const card = document.createElement("div");
     card.classList.add("request-card");
@@ -56,18 +34,39 @@ membershipRequests.forEach(function(request){
 
 });
 
-const rosterTable = document.querySelector("#roster-table tbody");
 
-roster.forEach(function(record){
+fetch("/api/club/roster/")
+    .then(function(response) {
 
-    const row = document.createElement("tr");
+        if (!response.ok) {
+            throw new Error("Failed to load roster.");
 
-    row.innerHTML = `
-        <td>${record.member}</td>
-        <td>${record.club}</td>
-        <td>${record.membership}</td>
-    `;
+        }
 
-    rosterTable.appendChild(row);
+        return response.json();
 
-});
+    })
+    .then(function(roster) {
+
+        const rosterTable = document.querySelector("#roster-table tbody");
+
+        roster.forEach(function(record) {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${record.member_name}</td>
+                <td>${record.club_name}</td>
+                <td>${record.membership_type}</td>
+            `;
+
+            rosterTable.appendChild(row);
+
+        });
+
+    })
+    .catch(function(error) {
+
+        console.error("Error loading roster:", error);
+
+    });

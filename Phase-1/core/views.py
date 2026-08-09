@@ -67,7 +67,7 @@ def login(request):
 
 @admin_required
 def admin_dashboard(request):
-    return HttpResponse("Welcome Admin!")
+    return render(request, "admin_dashboard.html")
 
 @admin_required
 def manage_roster(request):
@@ -137,6 +137,25 @@ def enroll_member(request):
         "club_id": club.club_id,
         "roster_id": roster.roster_id
     })
+
+
+@csrf_exempt
+def roster_listings(request):
+    roster_entries = Roster.objects.select_related("member", "club").all()
+
+    roster_list = []
+
+    for roster in roster_entries:
+        roster_list.append({
+            "roster_id": roster.roster_id,
+            "member_id": roster.member.member_id,
+            "member_name": roster.member.name,
+            "club_id": roster.club.club_id,
+            "club_name": roster.club.club_name,
+            "membership_type": roster.member.membership_type,
+        })
+
+    return JsonResponse(roster_list, safe=False)
 
 @csrf_exempt
 def leave_club(request):
